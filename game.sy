@@ -9,7 +9,7 @@ init :: fn {
 }
 
 update :: fn delta: float {
-    x -= l_input_value("move_left") * delta
+    x += l_input_value("move_left") * delta
     y -= l_input_value("move_up") * delta
 }
 
