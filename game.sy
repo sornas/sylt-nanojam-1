@@ -14,7 +14,7 @@ update :: fn delta: float {
 }
 
 draw :: fn {
-    l_gfx_rect! x, y, 1.0, 1.0, (1, 0, 0)
+    l_gfx_rect! x, y, 1.0, 1.0, (1.0, 0.0, 0.0)
 }
 
 // this could be a "default" in the language in some way
@@ -23,6 +23,7 @@ start :: fn {
 
     iter := inf(0) // ?
     for _ in iter {
+        _
         if l_input_down("quit") {
             break
         }
