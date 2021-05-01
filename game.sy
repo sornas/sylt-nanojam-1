@@ -1,0 +1,35 @@
+x := 0.0
+y := 0.0
+
+init :: fn {
+    l_bind_quit("quit") // ?
+
+    l_bind_axis(0, "LeftX", "move_left")
+    l_bind_axis(0, "LeftY", "move_up")
+}
+
+update :: fn delta: float {
+    x -= l_input_value("move_left") * delta
+    y -= l_input_value("move_up") * delta
+}
+
+draw :: fn {
+    l_gfx_rect! x, y, 1.0, 1.0, (1, 0, 0)
+}
+
+// this could be a "default" in the language in some way
+start :: fn {
+    init!
+
+    iter := inf(0) // ?
+    for _ in iter {
+        if l_input_down("quit") {
+            break
+        }
+
+        l_update!
+        update! l_delta!
+        draw!
+        l_render!
+    }
+}
