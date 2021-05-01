@@ -28,7 +28,7 @@ init :: fn {
         l_gfx_particle_start_alpha! system, (0.6, 0.8), "Uniform"
         l_gfx_particle_end_alpha!   system, (0.3, 0.4), "Uniform"
 
-        l_gfx_particle_vel_magnitude! system, (0.8, 1.6), "Square"
+        l_gfx_particle_vel_magnitude! system, (0.9, 1.5), "Square"
     }
 }
 
@@ -54,8 +54,11 @@ update :: fn delta: float {
     }
 
     for system in systems {
-        l_gfx_particle_start_sx! system, (size / 3.0, size / 3.0 + size / 10.0), "Uniform"
-        l_gfx_particle_start_sy! system, (size / 3.0, size / 3.0 + size / 10.0), "Uniform"
+        l_gfx_particle_start_sx! system, (size / 4.0, size / 4.0 + size / 10.0 + 0.05), "Uniform"
+        l_gfx_particle_start_sy! system, (size / 4.0, size / 4.0 + size / 10.0 + 0.05), "Uniform"
+
+        vel_mid := size * 3.0
+        l_gfx_particle_vel_magnitude! system, (vel_mid - 0.3, vel_mid + 0.3), "Square"
     }
 
     if l_random() < -1.05 * size + 1.25 {
