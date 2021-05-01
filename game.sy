@@ -1,24 +1,31 @@
 x := 0.0
 y := 0.0
+size := 0.2
 
 init :: fn {
-    l_bind_quit("quit") // ?
-
     l_bind_axis(0, "LeftX", "move_left")
     l_bind_axis(0, "LeftY", "move_up")
+
+    l_bind_axis(0, "TriggerLeft", "size_down")
+    l_bind_axis(0, "TriggerRight", "size_up")
 }
 
 update :: fn delta: float {
     x += l_input_value("move_left") * delta
     y -= l_input_value("move_up") * delta
+
+    d_size := l_input_value("size_up") - l_input_value("size_down")
+    size += d_size
 }
 
 draw :: fn {
-    l_gfx_rect! x, y, 1.0, 1.0, (1.0, 0.0, 0.0)
+    l_gfx_rect! x, y, size, size, (1.0, 0.0, 0.0)
 }
 
-// this could be a "default" in the language in some way
+// this could be a "default" in the language in some way.
+// has some weird stuff that _will_ be the same for everyone who's new
 start :: fn {
+    l_bind_quit("quit") // ?
     init!
 
     iter := inf(0) // ?
