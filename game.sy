@@ -27,6 +27,8 @@ init :: fn {
         l_gfx_particle_end_blue!    system, (0.0, 0.0), "Uniform"
         l_gfx_particle_start_alpha! system, (1.0, 1.0), "Uniform"
         l_gfx_particle_end_alpha!   system, (0.4, 0.6), "Uniform"
+
+        l_gfx_particle_vel_magnitude! system, (0.8, 1.6), "Square"
     }
 }
 
@@ -46,6 +48,11 @@ update :: fn delta: float {
         l_gfx_particle_start_green! particles_smaller, (0.5, 0.8), "Uniform" // yellow
     } else {
         l_gfx_particle_start_green! particles_smaller, (0.0, 0.0), "Uniform" // yellow
+    }
+
+    for system in systems {
+        l_gfx_particle_start_sx! system, (size / 3.0, size / 3.0 + size / 10.0), "Uniform"
+        l_gfx_particle_start_sy! system, (size / 3.0, size / 3.0 + size / 10.0), "Uniform"
     }
 
     if d_size > 0.0 {
