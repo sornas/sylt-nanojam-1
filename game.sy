@@ -6,16 +6,15 @@ init :: fn {
     l_bind_axis(0, "LeftX", "move_left")
     l_bind_axis(0, "LeftY", "move_up")
 
-    l_bind_axis(0, "TriggerLeft", "size_down")
-    l_bind_axis(0, "TriggerRight", "size_up")
+    l_bind_axis(0, "RightX", "size_up")
 }
 
 update :: fn delta: float {
     x += l_input_value("move_left") * delta
     y -= l_input_value("move_up") * delta
 
-    d_size := l_input_value("size_up") - l_input_value("size_down")
-    size += d_size
+    d_size := l_input_value("size_up")
+    size += d_size * delta
 }
 
 draw :: fn {
