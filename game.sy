@@ -40,12 +40,19 @@ update :: fn delta: float {
     }
 
     d_size := l_input_value("size_up")
+    size += d_size * delta
+    if size < 0.1 {
+        size = 0.1
+        l_gfx_particle_start_green! particles_smaller, (0.5, 0.8), "Uniform" // yellow
+    } else {
+        l_gfx_particle_start_green! particles_smaller, (0.0, 0.0), "Uniform" // yellow
+    }
+
     if d_size > 0.0 {
         l_gfx_particle_spawn! particles_bigger
     } else if d_size < 0.0 {
         l_gfx_particle_spawn! particles_smaller
     }
-    size += d_size * delta
 
     l_gfx_particle_update! particles_bigger, delta
     l_gfx_particle_update! particles_smaller, delta
