@@ -47,6 +47,9 @@ update :: fn delta: float {
         size = 0.1
         l_gfx_particle_start_green! particles_smaller, (0.5, 0.8), "Uniform" // yellow
     } else {
+        if size > 1.0 {
+            size = 1.0
+        }
         l_gfx_particle_start_green! particles_smaller, (0.0, 0.0), "Uniform" // yellow
     }
 
@@ -55,11 +58,16 @@ update :: fn delta: float {
         l_gfx_particle_start_sy! system, (size / 3.0, size / 3.0 + size / 10.0), "Uniform"
     }
 
-    if d_size > 0.0 {
-        l_gfx_particle_spawn! particles_bigger
-    } else if d_size < 0.0 {
-        l_gfx_particle_spawn! particles_smaller
+    if l_random() < -1.05 * size + 1.25 {
+        if d_size > 0.0 {
+            l_gfx_particle_spawn! particles_bigger
+        } else if d_size < 0.0 {
+            l_gfx_particle_spawn! particles_smaller
+        }
     }
+
+    // size = 0.1 => 1.0
+    // size = 1.0 => 0.2
 
     l_gfx_particle_update! particles_bigger, delta
     l_gfx_particle_update! particles_smaller, delta
